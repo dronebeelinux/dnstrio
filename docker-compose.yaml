@@ -1,0 +1,67 @@
+version: "3"
+networks:
+  dns:
+    
+services:
+  bind9:
+    container_name: bind9
+    hostname: dns1.thetom.xyz
+    image: ubuntu/bind9:latest
+    networks:
+      dns:
+        ipv4_address: 172.31.1.4
+        aliases:
+          - dns1
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+    environment:
+      - BIND9_USER=root
+      - TZ=Etc/UTC
+    volumes:
+      - ${HOME}/projects/dns-trio/config:/etc/bind/
+      - ${HOME}/projects/dns-trio/var/cache/bind:/var/cache/bind
+      - ${HOME}/projects/dns-trio/var/lib/bind:/var/lib/bind
+    restart: always
+  pihole:
+    container_name: pihole
+    hostname: pihole1.thetom.xyz
+    image: pihole/pihole:latest
+    networks:
+      dns:
+        ipv4_address: 172.31.1.3
+        aliases:
+          - pihole1
+    ports:
+      - "80:80/tcp"
+      - "443:443/tcp"
+    environment:
+      TZ: 'Etc/UTC'
+      WEBPASSWORD_FILE: /run/secrets/web_password
+      DNSMASQ_LISTENING: 'all'
+      PIHOLE_DNS_: 'unbound1#53'
+      FTLCONF_LOCAL_IPV4: 172.31.1.3
+    # Volumes store your data between container upgrades
+    secrets:
+      - web_password
+    volumes:
+      - '${HOME}/projects/dns-trio/etc-pihole:/etc/pihole'
+      - '${HOME}/projects/dns-trio/etc-dnsmasq.d:/etc/dnsmasq.d'
+    restart: always
+  unbound:
+    container_name: unbound
+    hostname: unbound1.thetom.xyz
+    image: "mvance/unbound:latest"
+    networks:
+      dns:
+        ipv4_address: 172.31.1.2
+        aliases:
+          - unbound1
+    volumes:
+      - '${HOME}/projects/dns-trio/etc/unbound/unbound.conf.d:/etc/unbound/unbound.conf.d'
+      - '${HOME}/projects/dns-trio/var/lib/unbound:/var/lib/unbound'
+      - '${HOME}/projects/dns-trio/var/log/unbound:/var/log/unbound'
+    restart: always
+secrets:
+  web_password:
+    file: ${HOME}/projects/dns-trio/secrets/web_password.txt
