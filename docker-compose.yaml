@@ -1,7 +1,12 @@
 version: "3"
 networks:
   dns:
-    
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.31.1.0/16
+          ip_range: 172.31.1.0/24
+          gateway: 172.31.1.1
 services:
   bind9:
     container_name: bind9
