@@ -59,6 +59,8 @@ services:
     restart: always
   unbound:
     container_name: unbound
+    cap_add:
+      - NET_ADMIN
     hostname: unbound1.thetom.xyz
     image: "mvance/unbound:latest"
     networks:
@@ -67,9 +69,7 @@ services:
         aliases:
           - unbound1
     volumes:
-      - '${HOME}/projects/dns-trio/etc/unbound/unbound.conf.d:/etc/unbound/unbound.conf.d'
-      - '${HOME}/projects/dns-trio/var/lib/unbound:/var/lib/unbound'
-      - '${HOME}/projects/dns-trio/var/log/unbound:/var/log/unbound'
+      - '${HOME}/projects/dns-trio/unbound:/opt/unbound/etc/unbound/'
     restart: always
 secrets:
   web_password:
