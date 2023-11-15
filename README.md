@@ -30,11 +30,7 @@ echo "password" > ./secrets/web_password.txt
 https://docs.pi-hole.net/guides/dns/unbound/
 https://github.com/MatthewVance/unbound-docker
 ```
-mkdir -p ./etc/unbound/unbound.conf.d
-mkdir -p ./var/lib/unbound/
-mkdir -p ./var/log/unbound/
-touch ./var/log/unbound/unbound.log
-wget https://www.internic.net/domain/named.root -qO- | sudo tee ./var/lib/unbound/root.hints
+wget https://www.internic.net/domain/named.root -qO- | sudo tee ./unbound/root.hints
 ```
 ### start the dns-trio
 ```docker compose up -d
