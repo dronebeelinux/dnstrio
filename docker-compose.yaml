@@ -26,9 +26,9 @@ services:
       - BIND9_USER=root
       - TZ=Etc/UTC
     volumes:
-      - ${HOME}/projects/dns-trio/config:/etc/bind/
-      - ${HOME}/projects/dns-trio/var/cache/bind:/var/cache/bind
-      - ${HOME}/projects/dns-trio/var/lib/bind:/var/lib/bind
+      - ${PWD}/config:/etc/bind/
+      - ${PWD}/var/cache/bind:/var/cache/bind
+      - ${PWD}/var/lib/bind:/var/lib/bind
     restart: always
   pihole:
     depends_on:
@@ -54,8 +54,8 @@ services:
     secrets:
       - web_password
     volumes:
-      - '${HOME}/projects/dns-trio/etc-pihole:/etc/pihole'
-      - '${HOME}/projects/dns-trio/etc-dnsmasq.d:/etc/dnsmasq.d'
+      - '${PWD}/etc-pihole:/etc/pihole'
+      - '${PWD}/etc-dnsmasq.d:/etc/dnsmasq.d'
     restart: always
   unbound:
     container_name: unbound
@@ -69,8 +69,8 @@ services:
         aliases:
           - unbound1
     volumes:
-      - '${HOME}/projects/dns-trio/unbound:/opt/unbound/etc/unbound/'
+      - '${PWD}/unbound:/opt/unbound/etc/unbound/'
     restart: always
 secrets:
   web_password:
-    file: ${HOME}/projects/dns-trio/secrets/web_password.txt
+    file: ${PWD}/secrets/web_password.txt
