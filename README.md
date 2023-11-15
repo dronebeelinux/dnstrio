@@ -12,10 +12,9 @@ sudo systemctl restart systemd-resolved
 ```
 git clone https://github.com/dronebeelinux/dns-trio.git
 cd ./dns-trio
-mkdir -p ./config
 mkdir -p ./var/cache/bind
 mkdir -p ./var/lib/bind
-sudo find * -type d -exec chmod -R 755 {} \;
+sudo find ./var -type d -exec chmod -R 755 {} \;
 sudo chown -R root:root ./config ./var
 ```
 ### pihole on docker
