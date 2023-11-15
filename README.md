@@ -8,9 +8,12 @@ sudo sed -i 's/^#DNSStubListener=yes/DNSStubListener=no/g' /etc/systemd/resolved
 sudo ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf
 sudo systemctl restart systemd-resolved
 ```
-#### create directories for bind server volumes
+#### clone project
 ```
 git clone https://github.com/dronebeelinux/dns-trio.git
+```
+#### create directories for bind server volumes
+```
 cd ./dns-trio
 mkdir -p ./var/cache/bind
 mkdir -p ./var/lib/bind
