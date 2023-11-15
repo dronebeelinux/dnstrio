@@ -2,3 +2,4 @@ etc-dnsmasq.d/*
 etc-pihole/*
 var/cache/bind/*
 unbound/unbound.log
+unbound/var/root.key
