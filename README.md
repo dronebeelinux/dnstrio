@@ -35,5 +35,6 @@ https://github.com/MatthewVance/unbound-docker
 wget https://www.internic.net/domain/named.root -qO- | sudo tee ./unbound/root.hints
 ```
 ### start the dns-trio
-```docker compose up -d
+```
+docker compose up -d
 ```
