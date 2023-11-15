@@ -9,6 +9,8 @@ networks:
           gateway: 172.31.1.1
 services:
   bind9:
+    depends_on:
+      - pihole
     container_name: bind9
     hostname: dns1.thetom.xyz
     image: ubuntu/bind9:latest
@@ -29,6 +31,8 @@ services:
       - ${HOME}/projects/dns-trio/var/lib/bind:/var/lib/bind
     restart: always
   pihole:
+    depends_on:
+      - unbound
     container_name: pihole
     hostname: pihole1.thetom.xyz
     image: pihole/pihole:latest
