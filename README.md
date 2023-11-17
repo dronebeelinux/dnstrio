@@ -23,9 +23,9 @@ sudo chown -R 100:101 ./config ./var
 ### pihole on docker
 https://github.com/pi-hole/docker-pi-hole
 ```
-mkdir ./etc-pihole
-mkdir ./etc-dnsmasq.d
-mkdir ./secrets/
+mkdir -p ./pihole/etc-pihole
+mkdir -p ./pihole/etc-dnsmasq.d
+mkdir -p ./pihole/secrets/
 echo "password" > ./secrets/web_password.txt
 ```
 ### unbound on docker
