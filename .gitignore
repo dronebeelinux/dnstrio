@@ -2,6 +2,3 @@ etc-dnsmasq.d/*
 etc-pihole/*
 !etc-pihole/99-edns.conf
 var/cache/bind/*
-unbound/unbound.log
-unbound/unbound.pid
-unbound/var/root.key
