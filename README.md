@@ -18,7 +18,7 @@ cd ./dns-trio
 mkdir -p ./var/cache/bind
 mkdir -p ./var/lib/bind
 sudo find ./var -type d -exec chmod -R 755 {} \;
-sudo chown -R root:root ./config ./var
+sudo chown -R 100:101 ./config ./var
 ```
 ### pihole on docker
 https://github.com/pi-hole/docker-pi-hole
