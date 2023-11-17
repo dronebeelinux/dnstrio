@@ -63,6 +63,10 @@ services:
     volumes:
       - type: bind
         read_only: true
+        source: ${PWD}/unbound/etc/unbound/var/root.hints
+        target: /opt/unbound/etc/unbound/var/root.hints
+      - type: bind
+        read_only: true
         source: ${PWD}/unbound/etc/unbound/unbound.conf
         target: /opt/unbound/etc/unbound/unbound.conf
     networks:

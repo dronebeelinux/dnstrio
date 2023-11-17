@@ -1,4 +1,5 @@
 pihole/etc-dnsmasq.d/*
 pihole/etc-pihole/*
 bind/var/cache/bind/*
+unbound/etc/unbound/var/root.key
 !pihole/etc-dnsmasq.d/99-edns.conf
