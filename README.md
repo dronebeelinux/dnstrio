@@ -22,11 +22,9 @@ sudo chown -R 100:101 ./bind
 ```
 ### pihole on docker
 https://github.com/pi-hole/docker-pi-hole
+The password exists as "password" (no quotes). Use the below command if you want to change it.
 ```
-mkdir -p ./pihole/etc-pihole
-mkdir -p ./pihole/etc-dnsmasq.d
-mkdir -p ./pihole/secrets/
-echo "password" > ./secrets/web_password.txt
+echo "password" > ./pihole/secrets/web_password.txt
 ```
 ### unbound on docker
 https://docs.pi-hole.net/guides/dns/unbound/
