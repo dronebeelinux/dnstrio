@@ -59,8 +59,6 @@ services:
     restart: always
   unbound:
     container_name: unbound
-    cap_add:
-      - NET_ADMIN
     hostname: unbound1.thetom.xyz
     image: "mvance/unbound:latest"
     networks:
