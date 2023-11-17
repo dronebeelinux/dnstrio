@@ -16,7 +16,7 @@ sudo systemctl restart systemd-resolved
 git clone https://github.com/dronebeelinux/dns-trio.git
 ```
 #### bind9 DNS on docker
-Background info on image:
+Reference:
 https://hub.docker.com/r/ubuntu/bind9
 ```
 cd ./dns-trio
@@ -37,9 +37,13 @@ The default installation of pihole will not allow connections to many websites t
 echo "password" > ./pihole/secrets/web_password.txt
 ```
 ### Unbound on docker
-The docker-compose.yaml for this project was originally pulled from:
+Reference:
 https://github.com/MatthewVance/unbound-docker
-Minor modifications have been made.
+
+#### get root hints
+```
+dig +bufsize=1200 +norec NS . @a.root-servers.net | tee ~/projects/dns-trio/unbound/etc/unbound/var/root.hints
+```
 ### Update the environment
 The settings in ```.env``` should be updated to suite your needs based on your networking and hostname requirements.
 ### Start the dns-trio
