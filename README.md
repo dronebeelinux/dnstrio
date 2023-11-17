@@ -15,7 +15,9 @@ sudo systemctl restart systemd-resolved
 ```
 git clone https://github.com/dronebeelinux/dns-trio.git
 ```
-#### Create directories for bind server volumes
+#### bind9 DNS on docker
+Background info on image:
+https://hub.docker.com/r/ubuntu/bind9
 ```
 cd ./dns-trio
 mkdir -p ./bind/var/cache/bind
