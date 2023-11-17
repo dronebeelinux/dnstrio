@@ -54,8 +54,8 @@ services:
     secrets:
       - web_password
     volumes:
-      - '${PWD}/etc-pihole:/etc/pihole'
-      - '${PWD}/etc-dnsmasq.d:/etc/dnsmasq.d'
+      - '${PWD}/pihole/etc-pihole:/etc/pihole'
+      - '${PWD}/pihole/etc-dnsmasq.d:/etc/dnsmasq.d'
     restart: always
   unbound:
     container_name: unbound
@@ -71,4 +71,4 @@ services:
     restart: always
 secrets:
   web_password:
-    file: ${PWD}/secrets/web_password.txt
+    file: ${PWD}/pihole/secrets/web_password.txt
