@@ -15,10 +15,10 @@ git clone https://github.com/dronebeelinux/dns-trio.git
 #### create directories for bind server volumes
 ```
 cd ./dns-trio
-mkdir -p ./var/cache/bind
-mkdir -p ./var/lib/bind
-sudo find ./var -type d -exec chmod -R 755 {} \;
-sudo chown -R 100:101 ./config ./var
+mkdir -p ./bind/var/cache/bind
+mkdir -p ./bind/var/lib/bind
+sudo find ./bind -type d -exec chmod -R 755 {} \;
+sudo chown -R 100:101 ./bind
 ```
 ### pihole on docker
 https://github.com/pi-hole/docker-pi-hole

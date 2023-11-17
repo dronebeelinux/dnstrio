@@ -26,9 +26,9 @@ services:
       - BIND9_USER=bind
       - TZ=Etc/UTC
     volumes:
-      - ${PWD}/config:/etc/bind/
-      - ${PWD}/var/cache/bind:/var/cache/bind
-      - ${PWD}/var/lib/bind:/var/lib/bind
+      - ${PWD}/bind/etc/bind:/etc/bind
+      - ${PWD}/bind/var/cache/bind:/var/cache/bind
+      - ${PWD}/bind/var/lib/bind:/var/lib/bind
     restart: always
   pihole:
     depends_on:
