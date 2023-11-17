@@ -30,6 +30,8 @@ sudo chown -R 100:101 ./bind
 The docker-compose.yaml for this project was originally pulled from:
 https://github.com/pi-hole/docker-pi-hole
 Minor modifications have been made.
+
+The default installation of pihole will not allow connections to many websites that contain ads. If you find you are blocked right away, check the pihole query log for details.
 ```
 # NOTE: The password exists as "password" (no quotes). Use the below command if you want to change it.
 echo "password" > ./pihole/secrets/web_password.txt
