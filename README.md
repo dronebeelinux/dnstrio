@@ -4,8 +4,8 @@ Setup an authoritative DNS server using bind9, connected to a pihole instance th
 ### Pre-requisites
 These procedures assume you are using Ubuntu Linux. The steps were tested on Ubuntu 22.04.3 LTS (Jammy Jellyfish). It is recommended the target server for this installation use either static IP addresses or a DHCP reservation to achieve the same result.
 
-Modifications have been made to the Docker networking settings to ensure a connection between the three components.
-#### Update ubuntu to not use the built-resolver
+Modifications have been made to the Docker networking settings to ensure a connection between the three containers.
+#### Update ubuntu to not use the built-in resolver
 ```
 sudo sed -i 's/^#DNSStubListener=.*/DNSStubListener=no/g' /etc/systemd/resolved.conf
 sudo ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf
