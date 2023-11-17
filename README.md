@@ -5,7 +5,7 @@
 Background info:
 https://www.linuxuprising.com/2020/07/ubuntu-how-to-free-up-port-53-used-by.html
 ```
-sudo sed -i 's/^#DNSStubListener=yes/DNSStubListener=no/g' /etc/systemd/resolved.conf
+sudo sed -i 's/^#DNSStubListener=.*/DNSStubListener=no/g' /etc/systemd/resolved.conf
 sudo ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf
 sudo systemctl restart systemd-resolved
 ```
