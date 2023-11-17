@@ -23,7 +23,7 @@ services:
       - "53:53/tcp"
       - "53:53/udp"
     environment:
-      - BIND9_USER=root
+      - BIND9_USER=bind
       - TZ=Etc/UTC
     volumes:
       - ${PWD}/config:/etc/bind/
