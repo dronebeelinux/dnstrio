@@ -71,8 +71,8 @@ services:
       - "53:53/tcp"
       - "53:53/udp"
     environment:
-      - BIND9_USER: bind
-      - TZ: 'Etc/UTC'
+      BIND9_USER: bind
+      TZ: 'Etc/UTC'
     volumes:
       - ${PWD}/bind/etc/bind:/etc/bind
       - ${PWD}/bind/var/cache/bind:/var/cache/bind
