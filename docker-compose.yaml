@@ -4,16 +4,16 @@ networks:
     ipam:
       driver: default
       config:
-        - subnet: 172.31.1.0/16
-          ip_range: 172.31.1.0/24
-          gateway: 172.31.1.1
+        - subnet: ${SUBNET}/${SUBNETCIDR}
+          ip_range: ${IPRANGE}/${IPRANGECIDR}
+          gateway: ${GATEWAY}
 secrets:
   web_password:
     file: ${PWD}/pihole/secrets/web_password.txt
 services:
   unbound:
     container_name: unbound
-    hostname: unbound1.thetom.xyz
+    hostname: ${UNBOUNDHOSTNAME}.${DOMAIN}.${TLD}
     image: mvance/unbound:latest
     volumes:
       - type: bind
@@ -26,21 +26,21 @@ services:
         target: /opt/unbound/etc/unbound/unbound.conf
     networks:
       dns:
-        ipv4_address: 172.31.1.2
+        ipv4_address: ${UNBOUNDIP}
         aliases:
-          - unbound1
+          - ${UNBOUNDHOSTNAME}
     restart: always
   pihole:
     depends_on:
       - unbound
     container_name: pihole
-    hostname: pihole1.thetom.xyz
+    hostname: ${PIHOLEHOSTNAME}.${DOMAIN}.${TLD}
     image: pihole/pihole:latest
     networks:
       dns:
-        ipv4_address: 172.31.1.3
+        ipv4_address: ${PIHOLEIP}
         aliases:
-          - pihole1
+          - ${PIHOLEHOSTNAME}
     ports:
       - "80:80/tcp"
       - "443:443/tcp"
@@ -60,13 +60,13 @@ services:
     depends_on:
       - pihole
     container_name: bind9
-    hostname: dns1.thetom.xyz
+    hostname: ${BIND9HOSTNAME}.${DOMAIN}.${TLD}
     image: ubuntu/bind9:latest
     networks:
       dns:
-        ipv4_address: 172.31.1.4
+        ipv4_address: ${BIND9IP}
         aliases:
-          - dns1
+          - ${BIND9HOSTNAME}
     ports:
       - "53:53/tcp"
       - "53:53/udp"
