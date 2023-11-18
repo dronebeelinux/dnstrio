@@ -53,8 +53,8 @@ services:
     secrets:
       - web_password
     volumes:
-      - '${PWD}/pihole/etc-pihole:/etc/pihole'
-      - '${PWD}/pihole/etc-dnsmasq.d:/etc/dnsmasq.d'
+      - ${PWD}/pihole/etc-pihole:/etc/pihole
+      - ${PWD}/pihole/etc-dnsmasq.d:/etc/dnsmasq.d
     restart: always
   bind9:
     depends_on:
