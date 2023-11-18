@@ -1,0 +1,4 @@
+zone "thetom.internal" {
+    type master;
+    file "/etc/bind/zones/db.thetom.internal";
+};

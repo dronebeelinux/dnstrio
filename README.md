@@ -21,7 +21,6 @@ https://hub.docker.com/r/ubuntu/bind9
 ```
 cd ./dns-trio
 mkdir -p ./bind/var/cache/bind
-mkdir -p ./bind/var/lib/bind
 sudo find ./bind -type d -exec chmod -R 755 {} \;
 # NOTE: The user id 100 and gid 101 will not match to the "bind" user on Ubuntu but will inside of the Docker container.
 sudo chown -R 100:101 ./bind
