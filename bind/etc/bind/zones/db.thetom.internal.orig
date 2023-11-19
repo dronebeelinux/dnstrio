@@ -1,0 +1,24 @@
+$ORIGIN internal.
+$TTL    1d
+
+; soa servers - SOA records
+thetom     IN    SOA     ns1.thetom.internal. hostmaster.thetom.internal. (
+                  5      ; Serial
+                  4h     ; Refresh
+                  4h     ; Retry
+                  1w     ; Expire
+                  4m )   ; Negative Cache TTL
+
+; name servers - NS records
+           IN   NS      ns1.thetom.internal.
+
+$ORIGIN thetom.internal.
+$TTL    1h
+
+; hosts - A records
+ns1            IN      A      172.31.1.4
+ns1            IN      A      192.168.40.130
+
+unbound1       IN      A      172.31.1.2
+pihole1        IN      A      172.31.1.3
+pihole1        IN      A      192.168.40.130
