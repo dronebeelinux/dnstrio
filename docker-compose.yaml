@@ -49,7 +49,7 @@ services:
       WEBPASSWORD_FILE: /run/secrets/web_password
       DNSMASQ_LISTENING: all
       PIHOLE_DNS_: 'unbound1#53'
-      FTLCONF_LOCAL_IPV4: 172.31.1.3
+      FTLCONF_LOCAL_IPV4: ${BIND9IP}
     secrets:
       - web_password
     volumes:
