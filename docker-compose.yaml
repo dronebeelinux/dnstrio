@@ -26,7 +26,7 @@ services:
         target: /opt/unbound/etc/unbound/unbound.conf
     networks:
       dns:
-        ipv4_address: ${UNBOUNDIP}
+        ipv4_address: ${UNBOUNDIP_DOCKER}
         aliases:
           - ${UNBOUNDHOSTNAME}
     restart: always
@@ -38,7 +38,7 @@ services:
     image: pihole/pihole:latest
     networks:
       dns:
-        ipv4_address: ${PIHOLEIP}
+        ipv4_address: ${PIHOLEIP_DOCKER_DOCKER}
         aliases:
           - ${PIHOLEHOSTNAME}
     ports:
@@ -49,7 +49,7 @@ services:
       WEBPASSWORD_FILE: /run/secrets/web_password
       DNSMASQ_LISTENING: all
       PIHOLE_DNS_: 'unbound1#53'
-      FTLCONF_LOCAL_IPV4: ${BIND9IP}
+      FTLCONF_LOCAL_IPV4: ${PIHOLEIP_DOCKER_DOCKER}
     secrets:
       - web_password
     volumes:
@@ -64,7 +64,7 @@ services:
     image: ubuntu/bind9:latest
     networks:
       dns:
-        ipv4_address: ${BIND9IP}
+        ipv4_address: ${BIND9IP_DOCKER}
         aliases:
           - ${BIND9HOSTNAME}
     ports:
