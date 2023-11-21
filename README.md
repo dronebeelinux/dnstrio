@@ -46,8 +46,8 @@ The settings in the ```placeholder_1.env``` and ```placeholder_2.env``` files sh
 ```
 chmod +x replace_env.sh
 vi placeholder_1.env
-vi placeholder_2.env
-
+```
+```
 # update DNS zone
 ./replace_env.sh bind/etc/bind/zones/db.domain_example.internal placeholder_1.env bind/etc/bind/zones/db.domain.internal
 
@@ -67,6 +67,8 @@ docker compose up -d
 ```
 ### Rinse and repeat
 Run these steps again on your second DNS server. Be sure to use the placeholder_2.env file instead of placeholder_1.env.
+```vi placeholder_2.env
+```
 ## Post install
 ### Point DNS clients to the new DNS trio server(s)
 Use your DHCP settings on your router or wherever your friendly, neigborhood DNS settings are stored. If you made it this far, you probably know what this means and what to do. If you're not sure, check out this site for more details on how to get started: [Fix my router DNS settings](https://letmegooglethat.com/?q=how+do+i+update+the+dns+server+setting+on+my+router%3F)
