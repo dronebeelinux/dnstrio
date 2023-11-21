@@ -4,8 +4,8 @@ networks:
     ipam:
       driver: default
       config:
-        - subnet: ${SUBNET}/${SUBNETCIDR}
-          ip_range: ${IPRANGE}/${IPRANGECIDR}
+        - subnet: ${SUBNET}/${NETCIDR}
+          ip_range: ${IPRANGE}/${IPCIDR}
           gateway: ${GATEWAY}
 secrets:
   web_password:
@@ -38,7 +38,7 @@ services:
     image: pihole/pihole:latest
     networks:
       dns:
-        ipv4_address: ${PIHOLEIP_DOCKER_DOCKER}
+        ipv4_address: ${PIHOLEIP_DOCKER}
         aliases:
           - ${PIHOLEHOSTNAME}
     ports:
@@ -49,7 +49,7 @@ services:
       WEBPASSWORD_FILE: /run/secrets/web_password
       DNSMASQ_LISTENING: all
       PIHOLE_DNS_: 'unbound1#53'
-      FTLCONF_LOCAL_IPV4: ${PIHOLEIP_DOCKER_DOCKER}
+      FTLCONF_LOCAL_IPV4: ${PIHOLEIP_DOCKER}
     secrets:
       - web_password
     volumes:
