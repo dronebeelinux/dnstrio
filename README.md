@@ -22,8 +22,6 @@ https://hub.docker.com/r/ubuntu/bind9
 cd ./dns-trio
 mkdir -p ./bind/var/cache/bind
 sudo find ./bind -type d -exec chmod -R 755 {} \;
-# NOTE: The user id 100 and gid 101 will not match to the "bind" user on Ubuntu but will inside of the Docker container.
-sudo chown -R 100:101 ./bind
 ```
 ### Pihole on docker
 The docker-compose.yaml for this project was originally pulled from:
@@ -45,16 +43,23 @@ dig +bufsize=1200 +norec NS . @a.root-servers.net | tee ~/projects/dns-trio/unbo
 ```
 ### Update the environment
 The settings in the ```placeholder_1.env``` and ```placeholder_2.env``` files should be updated to suite your needs based on your networking and hostname requirements.
-**NOTE: UPDATE FILE NAME AND ZONE NAME IN SCRIPT LATER**
 ```
 chmod +x replace_env.sh
 vi placeholder_1.env
 vi placeholder_2.env
+
 # update DNS zone
-./replace_env.sh bind/etc/bind/zones/db.thetom_example.internal placeholder_1.env bind/etc/bind/zones/db.thetom.internal
+./replace_env.sh bind/etc/bind/zones/db.domain_example.internal placeholder_1.env bind/etc/bind/zones/db.domain.internal
+
+# update the local config file
+./replace_env.sh bind/etc/bind/named.conf_example.local placeholder_1.env bind/etc/bind/named.conf.local
 
 # update docker environment
 ./replace_env.sh .env_example placeholder_1.env .env
+
+# fix permissions on bind files
+# NOTE: The user id 100 and gid 101 will not match to the "bind" user on Ubuntu but will inside of the Docker container.
+sudo chown -R 100:101 ./bind
 ```
 ### Start the dns-trio
 ```

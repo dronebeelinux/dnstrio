@@ -1,4 +1,4 @@
-zone "thetom.internal" {
+zone "EXAMPLE_DOMAIN.internal" {
     type master;
     file "/etc/bind/zones/db.domain.internal";
 };
