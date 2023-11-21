@@ -11,6 +11,10 @@ sudo sed -i 's/^#DNSStubListener=.*/DNSStubListener=no/g' /etc/systemd/resolved.
 sudo ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf
 sudo systemctl restart systemd-resolved
 ```
+#### Install Docker
+```
+
+```
 ### Clone the DNS-trio Project
 ```
 git clone https://github.com/dronebeelinux/dns-trio.git
@@ -47,12 +51,15 @@ The settings in the ```placeholder_1.env``` and ```placeholder_2.env``` files sh
 chmod +x replace_env.sh
 vi placeholder_1.env
 ```
-# update DNS zone
+# update bind9 DNS configs
 ```
 ./replace_env.sh bind/etc/bind/zones/db.domain_example.internal placeholder_1.env bind/etc/bind/zones/db.domain.internal
 
-# update the local config file
+# update the local zone config file
 ./replace_env.sh bind/etc/bind/named.conf_example.local placeholder_1.env bind/etc/bind/named.conf.local
+
+# update the options file
+./replace_env.sh bind/etc/bind/named.conf_example.local placeholder_1.env bind/etc/bind/named.conf.options
 
 # update docker environment
 ./replace_env.sh .env_example placeholder_1.env .env
