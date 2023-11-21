@@ -23,6 +23,9 @@ replace_placeholders() {
         if [[ $line =~ ^([A-Za-z_][A-Za-z0-9_]*)=(.*)$ ]]; then
             placeholder="${BASH_REMATCH[1]}"
             value="${BASH_REMATCH[2]}"
+            if [ "$placeholder" == "EXAMPLE_HOSTIP" ]; then
+                value=$(hostname -I | awk '{print $1}')
+            fi
             sed -i "s/$placeholder/$value/g" "$output_file"
         fi
     done < "$placeholders_file"
