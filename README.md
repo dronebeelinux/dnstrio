@@ -59,7 +59,7 @@ vi placeholder_1.env
 ./replace_env.sh bind/etc/bind/named.conf_example.local placeholder_1.env bind/etc/bind/named.conf.local
 
 # update the options file
-./replace_env.sh bind/etc/bind/named.conf_example.local placeholder_1.env bind/etc/bind/named.conf.options
+./replace_env.sh bind/etc/bind/named.conf_example.options placeholder_1.env bind/etc/bind/named.conf.options
 
 # update docker environment
 ./replace_env.sh .env_example placeholder_1.env .env
