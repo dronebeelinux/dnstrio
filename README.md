@@ -45,6 +45,10 @@ dig +bufsize=1200 +norec NS . @a.root-servers.net | tee ~/projects/dns-trio/unbo
 ```
 ### Update the environment
 The settings in ```.env``` should be updated to suite your needs based on your networking and hostname requirements.
+```
+chmod +x replace_env.sh
+./replace_env.sh ./bind/etc/bind/zones/db.thetom_example.internal ./bind/etc/bind/zones/test.internal
+```
 ### Start the dns-trio
 ```
 docker compose up -d
