@@ -44,12 +44,29 @@ https://github.com/MatthewVance/unbound-docker
 dig +bufsize=1200 +norec NS . @a.root-servers.net | tee ~/projects/dns-trio/unbound/etc/unbound/var/root.hints
 ```
 ### Update the environment
-The settings in ```.env``` should be updated to suite your needs based on your networking and hostname requirements.
+The settings in the ```placeholder_1.env``` and ```placeholder_2.env``` files should be updated to suite your needs based on your networking and hostname requirements.
 ```
 chmod +x replace_env.sh
-./replace_env.sh ./bind/etc/bind/zones/db.thetom_example.internal ./bind/etc/bind/zones/test.internal
+vi placeholder_1.env
+vi placeholder_2.env
+# update DNS zone
+./replace_env.sh bind/etc/bind/zones/db.thetom_example.internal placeholder_1.env bind/etc/bind/zones/test.internal
+
+# update docker environment
+./replace_env.sh .env_example placeholder_1.env .env
 ```
 ### Start the dns-trio
 ```
 docker compose up -d
 ```
+### Rinse and repeat
+Run these steps again on your second DNS server. Be sure to use the placeholder_2.env file instead of placeholder_1.env.
+## Post install
+### Point DNS clients to the new DNS trio server(s)
+Use your DHCP settings on your router or wherever your friendly, neigborhood DNS settings are stored. If you made it this far, you probably know what this means and what to do. If you're not sure, check out this site for more details on how to get started: [Fix my router DNS settings](https://letmegooglethat.com/?q=how+do+i+update+the+dns+server+setting+on+my+router%3F)
+### Update your pihole filters
+If you have another pihole running on your network and need to import the settings, [checkout the official pihole guide here:](https://docs.pi-hole.net/core/pihole-command/?h=telepor#teleport)
+## What's next?
+Other ideas to consider for this project:
+* making the second DNS server a "slave" server to the primary DNS server
+* creating certificates for use on the pihole webserver
