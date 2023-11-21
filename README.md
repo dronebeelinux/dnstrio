@@ -48,6 +48,7 @@ chmod +x replace_env.sh
 vi placeholder_1.env
 ```
 # update DNS zone
+```
 ./replace_env.sh bind/etc/bind/zones/db.domain_example.internal placeholder_1.env bind/etc/bind/zones/db.domain.internal
 
 # update the local config file
