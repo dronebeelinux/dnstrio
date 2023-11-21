@@ -2,12 +2,12 @@
 
 # Function to replace placeholders in the copied zone file using sed
 replace_placeholders() {
-    local zone_file="$1"
+    local input_file="$1"
     local placeholders_file="$2"
     local output_file="$3"
 
-    if [ ! -f "$zone_file" ]; then
-        echo "File $zone_file not found"
+    if [ ! -f "$input_file" ]; then
+        echo "File $input_file not found"
         exit 1
     fi
 
@@ -16,7 +16,7 @@ replace_placeholders() {
         exit 1
     fi
 
-    cp "$zone_file" "$output_file"  # Create a copy of the original file
+    cp "$input_file" "$output_file"  # Create a copy of the original file
 
     # Read placeholder-value pairs from the environment file and replace placeholders
     while IFS= read -r line || [ -n "$line" ]; do
@@ -26,7 +26,7 @@ replace_placeholders() {
             if [ "$placeholder" == "EXAMPLE_HOSTIP" ]; then
                 value=$(hostname -I | awk '{print $1}')
             fi
-            sed -i "s/$placeholder/$value/g" "$output_file"
+            sed -i "s|$placeholder|$value|g" "$output_file"
         fi
     done < "$placeholders_file"
 
@@ -35,13 +35,13 @@ replace_placeholders() {
 
 # Check if arguments are provided
 if [ "$#" -ne 3 ]; then
-    echo "Usage: $0 <zone_file> <placeholders_file> <output_file>"
+    echo "Usage: $0 <input_file> <placeholders_file> <output_file>"
     exit 1
 fi
 
 # Assign arguments to variables
-zone_file="$1"
+input_file="$1"
 placeholders_file="$2"
 output_file="$3"
 
-replace_placeholders "$zone_file" "$placeholders_file" "$output_file"
+replace_placeholders "$input_file" "$placeholders_file" "$output_file"
