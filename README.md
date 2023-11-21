@@ -47,7 +47,6 @@ The settings in the ```placeholder_1.env``` and ```placeholder_2.env``` files sh
 chmod +x replace_env.sh
 vi placeholder_1.env
 ```
-```
 # update DNS zone
 ./replace_env.sh bind/etc/bind/zones/db.domain_example.internal placeholder_1.env bind/etc/bind/zones/db.domain.internal
 
@@ -67,7 +66,8 @@ docker compose up -d
 ```
 ### Rinse and repeat
 Run these steps again on your second DNS server. Be sure to use the placeholder_2.env file instead of placeholder_1.env.
-```vi placeholder_2.env
+```
+vi placeholder_2.env
 ```
 ## Post install
 ### Point DNS clients to the new DNS trio server(s)
