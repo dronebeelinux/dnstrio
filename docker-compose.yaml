@@ -48,7 +48,7 @@ services:
       TZ: 'Etc/UTC'
       WEBPASSWORD_FILE: /run/secrets/web_password
       DNSMASQ_LISTENING: all
-      PIHOLE_DNS_: 'unbound1#53'
+      PIHOLE_DNS_: 'unbound#53'
       FTLCONF_LOCAL_IPV4: ${PIHOLEIP_DOCKER}
     secrets:
       - web_password
