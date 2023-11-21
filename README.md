@@ -76,3 +76,5 @@ If you have another pihole running on your network and need to import the settin
 Other ideas to consider for this project:
 * making the second DNS server a "slave" server to the primary DNS server
 * creating certificates for use on the pihole webserver
+* automating the pihole teleport import
+* is it possible to sync two pihole servers?
