@@ -45,12 +45,13 @@ dig +bufsize=1200 +norec NS . @a.root-servers.net | tee ~/projects/dns-trio/unbo
 ```
 ### Update the environment
 The settings in the ```placeholder_1.env``` and ```placeholder_2.env``` files should be updated to suite your needs based on your networking and hostname requirements.
+**NOTE: UPDATE FILE NAME AND ZONE NAME IN SCRIPT LATER**
 ```
 chmod +x replace_env.sh
 vi placeholder_1.env
 vi placeholder_2.env
 # update DNS zone
-./replace_env.sh bind/etc/bind/zones/db.thetom_example.internal placeholder_1.env bind/etc/bind/zones/test.internal
+./replace_env.sh bind/etc/bind/zones/db.thetom_example.internal placeholder_1.env bind/etc/bind/zones/db.thetom.internal
 
 # update docker environment
 ./replace_env.sh .env_example placeholder_1.env .env
