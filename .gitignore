@@ -1,4 +1,7 @@
 pihole/etc-dnsmasq.d/*
 pihole/etc-pihole/*
 bind/var/cache/bind/*
+bind/etc/bind/named.conf.options
+bind/etc/bind/zones/db.domain.internal
+unbound/etc/unbound/root.hints
 !pihole/etc-dnsmasq.d/99-edns.conf
