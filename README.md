@@ -50,13 +50,13 @@ sudo usermod -aG docker $USER
 Once completed, you can log out and log back in so that your group membership is checked again. If you're feeling fancy, just type ```bash``` to run up a new shell and keep going.
 ### Clone the DNS Trio Project
 ```
-git clone https://github.com/dronebeelinux/dns-trio.git
+git clone https://github.com/dronebeelinux/dnstrio.git
 ```
 ### bind9 DNS on docker
 Reference:
 https://hub.docker.com/r/ubuntu/bind9
 ```
-cd ./dns-trio
+cd ./dnstrio
 mkdir -p ./bind/var/cache/bind
 find ./bind -type d -exec chmod -R 755 {} \;
 ```
@@ -116,7 +116,7 @@ https://github.com/MatthewVance/unbound-docker
 
 #### get root hints
 ```
-dig +bufsize=1200 +norec NS . @a.root-servers.net | tee ~/projects/dns-trio/unbound/etc/unbound/var/root.hints
+dig +bufsize=1200 +norec NS . @a.root-servers.net | tee ./unbound/etc/unbound/var/root.hints
 ```
 ## Rinse and repeat (optional for a second DNS server)
 Run the same steps again on your second DNS server. Be sure to use the env2.env file instead of env1.env. Remember, one is none and two is one.
