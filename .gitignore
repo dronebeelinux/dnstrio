@@ -1,3 +1,4 @@
+.env
 pihole/etc-dnsmasq.d/*
 pihole/etc-pihole/*
 bind/var/cache/bind/*
