@@ -4,5 +4,5 @@ bind/var/cache/bind/*
 bind/etc/bind/named.conf.options
 bind/etc/bind/named.conf.local
 bind/etc/bind/zones/db.domain.internal
-unbound/etc/unbound/root.hints
+unbound/etc/unbound/var/root.hints
 !pihole/etc-dnsmasq.d/99-edns.conf
