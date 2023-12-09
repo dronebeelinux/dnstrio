@@ -12,7 +12,7 @@ options {
     internal;
   };
   listen-on {
-    EXAMPLE_BIND9IP_DOCKER;
+    0.0.0.0/0;
   };
   forwarders {
     EXAMPLE_PIHOLEIP_DOCKER port 53;
