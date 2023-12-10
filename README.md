@@ -113,6 +113,7 @@ Reference:
 
 Get root hints:
 ```
+mkdir -p ./unbound/etc/unbound/var
 dig +bufsize=1200 +norec NS . @a.root-servers.net | tee ./unbound/etc/unbound/var/root.hints
 ```
 ## Rinse and repeat (optional for a second DNS trio)
