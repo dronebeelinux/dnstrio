@@ -144,6 +144,11 @@ If you can't dig it, try nslookup:
 ```
 nslookup webhamster.com $(hostname -I | awk '{print $1}')
 ```
+Don't forget to check your new local domain:
+```
+source .env
+dig ns1.$DOMAIN.$TLD @$(hostname -I | awk '{print $1}')
+```
 # Post install
 Consider these steps after your DNS is up and running
 ## Point DNS clients to the new DNS trio server(s)
