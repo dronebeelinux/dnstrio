@@ -39,9 +39,26 @@ services:
       - ${PWD}/pihole/etc-pihole:/etc/pihole
       - ${PWD}/pihole/etc-dnsmasq.d:/etc/dnsmasq.d
     restart: always
-  bind9:
+  bind9init:
     depends_on:
       - pihole
+    container_name: bind9init
+    image: alpine
+    command:
+      - /bin/sh
+      - -c
+      - |
+        while ! ping -c 1 -n pihole >/dev/null 2>&1; do
+          echo "Waiting for pihole to become available..."
+          sleep 1
+        done
+        sed "s/EXAMPLE_PIHOLEIP_DOCKER/$(getent hosts pihole | awk '{ print $1 }')/g" /etc/bind/named.conf_example.options > /etc/bind/named.conf.options
+    volumes:
+      - ${PWD}/bind/etc/bind:/etc/bind
+  bind9:
+    depends_on:
+      bind9init:
+        condition: service_completed_successfully
     container_name: bind9
     hostname: ${BIND9HOSTNAME}.${DOMAIN}.${TLD}
     image: ubuntu/bind9:latest
