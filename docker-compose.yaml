@@ -1,19 +1,10 @@
 version: "3"
-networks:
-  dns:
-    ipam:
-      driver: default
-      config:
-        - subnet: ${SUBNET}/${NETCIDR}
-          ip_range: ${IPRANGE}/${IPCIDR}
-          gateway: ${GATEWAY}
 secrets:
   web_password:
     file: ${PWD}/pihole/secrets/web_password.txt
 services:
   unbound:
     container_name: unbound
-    hostname: ${UNBOUNDHOSTNAME}.${DOMAIN}.${TLD}
     image: mvance/unbound:latest
     volumes:
       - type: bind
@@ -24,11 +15,6 @@ services:
         read_only: true
         source: ${PWD}/unbound/etc/unbound/unbound.conf
         target: /opt/unbound/etc/unbound/unbound.conf
-    networks:
-      dns:
-        ipv4_address: ${UNBOUNDIP_DOCKER}
-        aliases:
-          - ${UNBOUNDHOSTNAME}
     restart: always
   pihole:
     depends_on:
@@ -36,11 +22,6 @@ services:
     container_name: pihole
     hostname: ${PIHOLEHOSTNAME}.${DOMAIN}.${TLD}
     image: pihole/pihole:latest
-    networks:
-      dns:
-        ipv4_address: ${PIHOLEIP_DOCKER}
-        aliases:
-          - ${PIHOLEHOSTNAME}
     ports:
       - "80:80/tcp"
       - "443:443/tcp"
@@ -49,7 +30,7 @@ services:
       WEBPASSWORD_FILE: /run/secrets/web_password
       DNSMASQ_LISTENING: all
       PIHOLE_DNS_: 'unbound#53'
-      FTLCONF_LOCAL_IPV4: ${PIHOLEIP_DOCKER}
+      FTLCONF_LOCAL_IPV4: pihole
       DNS_BOGUS_PRIV: true
       DNS_FQDN_REQUIRED: true
     secrets:
@@ -58,17 +39,29 @@ services:
       - ${PWD}/pihole/etc-pihole:/etc/pihole
       - ${PWD}/pihole/etc-dnsmasq.d:/etc/dnsmasq.d
     restart: always
-  bind9:
+  bind9init:
     depends_on:
       - pihole
+    container_name: bind9init
+    image: alpine
+    command:
+      - /bin/sh
+      - -c
+      - |
+        while ! ping -c 1 -n pihole >/dev/null 2>&1; do
+          echo "Waiting for pihole to become available..."
+          sleep 1
+        done
+        sed "s/EXAMPLE_PIHOLEIP_DOCKER/$(getent hosts pihole | awk '{ print $1 }')/g" /etc/bind/named.conf_example.options > /etc/bind/named.conf.options
+    volumes:
+      - ${PWD}/bind/etc/bind:/etc/bind
+  bind9:
+    depends_on:
+      bind9init:
+        condition: service_completed_successfully
     container_name: bind9
     hostname: ${BIND9HOSTNAME}.${DOMAIN}.${TLD}
     image: ubuntu/bind9:latest
-    networks:
-      dns:
-        ipv4_address: ${BIND9IP_DOCKER}
-        aliases:
-          - ${BIND9HOSTNAME}
     ports:
       - "53:53/tcp"
       - "53:53/udp"
