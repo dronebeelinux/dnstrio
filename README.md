@@ -87,10 +87,6 @@ chmod +x replace_env.sh
 
 ./replace_env.sh bind/etc/bind/named.conf_example.local ${DNSENV}.env bind/etc/bind/named.conf.local
 
-# update the options file:
-
-./replace_env.sh bind/etc/bind/named.conf_example.options ${DNSENV}.env bind/etc/bind/named.conf.options
-
 # update docker environment:
 
 ./replace_env.sh .env_example ${DNSENV}.env .env
